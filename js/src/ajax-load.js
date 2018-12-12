@@ -33,10 +33,13 @@ const AjaxLoad = (($) => {
   }
 
   const Selector = {
+    // DATA_TOGGLE  : '[data-toggle="tab"], [data-toggle="pill"], [data-toggle="list"]',
+    DATA_TOGGLE  : '[data-toggle="tab"], [data-toggle="pill"], [data-toggle="list"]',
     HEAD         : 'head',
-    NAV_DROPDOWN : '.sidebar-nav .nav-dropdown',
-    NAV_LINK     : '.sidebar-nav .nav-link',
-    NAV_ITEM     : '.sidebar-nav .nav-item',
+    NAV_DROPDOWN : '.nav .nav-dropdown',
+    NAV_LINK     : '.nav .nav-link',
+    NAV_ITEM     : '.nav .nav-item',
+    SIDEBAT_NAV  : '.sidebar-nav',
     VIEW_SCRIPT  : '.view-script'
   }
 
@@ -109,9 +112,7 @@ const AjaxLoad = (($) => {
 
           wrapper.querySelectorAll('script').forEach((script) => script.parentNode.removeChild(script))
 
-          $('body').animate({
-            scrollTop: 0
-          }, 0)
+          window.scrollTo(0, 0)
           $(element).html(wrapper)
           if (scripts.length) {
             loadScripts(scripts)
@@ -153,16 +154,22 @@ const AjaxLoad = (($) => {
     }
 
     _addEventListeners() {
+      $(document).on(Event.CLICK, Selector.DATA_TOGGLE, (event) => {
+        event.stopPropagation();
+      })
       $(document).on(Event.CLICK, `${Selector.NAV_LINK}[href!="#"]`, (event) => {
         event.preventDefault()
         event.stopPropagation()
 
-        if (event.currentTarget.target === '_top') {
-          this.loadTop(event.currentTarget.href)
-        } else if (event.currentTarget.target === '_blank') {
-          this.loadBlank(event.currentTarget.href)
-        } else {
-          this.setUpUrl(event.currentTarget.getAttribute('href'))
+        if (typeof event.currentTarget.dataset.toggle === 'undefined' || event.currentTarget.dataset.toggle === 'null') {
+          console.log(event.currentTarget.dataset.toggle)
+          if (event.currentTarget.target === '_top') {
+            this.loadTop(event.currentTarget.href)
+          } else if (event.currentTarget.target === '_blank') {
+            this.loadBlank(event.currentTarget.href)
+          } else {
+            this.setUpUrl(event.currentTarget.getAttribute('href'))
+          }
         }
       })
     }
