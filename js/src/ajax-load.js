@@ -33,11 +33,9 @@ const AjaxLoad = (($) => {
   }
 
   const Selector = {
-    // DATA_TOGGLE  : '[data-toggle="tab"], [data-toggle="pill"], [data-toggle="list"]',
-    DATA_TOGGLE  : '[data-toggle="tab"], [data-toggle="pill"], [data-toggle="list"]',
     HEAD         : 'head',
     NAV_DROPDOWN : '.nav .nav-dropdown',
-    NAV_LINK     : '.nav .nav-link',
+    NAV_LINK     : '.dropdown-nav-link, .nav .nav-link',
     NAV_ITEM     : '.nav .nav-item',
     SIDEBAT_NAV  : '.sidebar-nav',
     VIEW_SCRIPT  : '.view-script'
@@ -154,15 +152,11 @@ const AjaxLoad = (($) => {
     }
 
     _addEventListeners() {
-      $(document).on(Event.CLICK, Selector.DATA_TOGGLE, (event) => {
-        event.stopPropagation();
-      })
       $(document).on(Event.CLICK, `${Selector.NAV_LINK}[href!="#"]`, (event) => {
         event.preventDefault()
-        event.stopPropagation()
+        // event.stopPropagation()
 
         if (typeof event.currentTarget.dataset.toggle === 'undefined' || event.currentTarget.dataset.toggle === 'null') {
-          console.log(event.currentTarget.dataset.toggle)
           if (event.currentTarget.target === '_top') {
             this.loadTop(event.currentTarget.href)
           } else if (event.currentTarget.target === '_blank') {
