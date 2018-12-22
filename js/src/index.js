@@ -1,3 +1,10 @@
+/**
+ * --------------------------------------------------------------------------
+ *  * CoreUI (v3.0.0-next): index.js
+ * Licensed under MIT (https://coreui.io/license)
+ * --------------------------------------------------------------------------
+ */
+
 import './polyfill'
 import $ from 'jquery'
 import AjaxLoad from './ajax-load'
@@ -12,18 +19,12 @@ import Popover from './bootstrap/popover'
 import Scrollspy from './bootstrap/scrollspy'
 import Sidebar from './sidebar'
 import Tab from './bootstrap/tab'
-// import Toast from './bootstrap/toast'
+import Toast from './bootstrap/toast'
 import Tooltip from './bootstrap/tooltip'
 import Util from './bootstrap/util'
 
-/**
- * --------------------------------------------------------------------------
- * CoreUI (v2.1.3): index.js
- * Licensed under MIT (https://coreui.io/license)
- * --------------------------------------------------------------------------
- */
 
-(($) => {
+(() => {
   if (typeof $ === 'undefined') {
     throw new TypeError('CoreUI\'s JavaScript requires jQuery. jQuery must be included before CoreUI\'s JavaScript.')
   }
@@ -38,7 +39,7 @@ import Util from './bootstrap/util'
   if (version[0] < ltMajor && version[1] < minMinor || version[0] === minMajor && version[1] === minMinor && version[2] < minPatch || version[0] >= maxMajor) {
     throw new Error('CoreUI\'s JavaScript requires at least jQuery v1.9.1 but less than v4.0.0')
   }
-})($)
+})()
 
 export {
   Util,
@@ -54,7 +55,7 @@ export {
   Scrollspy,
   Sidebar,
   Tab,
-  // Toast,
+  Toast,
   Tooltip
 }
 
