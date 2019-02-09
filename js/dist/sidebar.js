@@ -183,8 +183,10 @@ var Sidebar = function ($) {
     };
 
     _proto._clickOutListener = function _clickOutListener(event) {
-      if (!this._element.contains(event.target)) {
+      if (event.target.closest(Selector.SIDEBAR) === null) {
         // or use: event.target.closest(Selector.SIDEBAR) === null
+        console.warn('_clickOutListener preventedDefaultEvent', event, this._element, !this._element.contains(event.target), event.target.closest(Selector.SIDEBAR) === null); // eslint-disable-line no-console
+
         event.preventDefault();
         event.stopPropagation();
 
@@ -221,6 +223,8 @@ var Sidebar = function ($) {
         $(Selector.BODY).toggleClass(ClassName.BRAND_MINIMIZED);
       });
       $(document).on(Event.CLICK, Selector.NAV_DROPDOWN_TOGGLE, function (event) {
+        console.log('nav-dropdown-toggle clicked'); // eslint-disable-line no-console
+
         event.preventDefault();
         event.stopPropagation();
         var dropdown = event.target;
