@@ -185,8 +185,6 @@ var Sidebar = function ($) {
     _proto._clickOutListener = function _clickOutListener(event) {
       if (event.target.closest(Selector.SIDEBAR) === null) {
         // or use: event.target.closest(Selector.SIDEBAR) === null
-        console.warn('_clickOutListener preventedDefaultEvent', event, this._element, !this._element.contains(event.target), event.target.closest(Selector.SIDEBAR) === null); // eslint-disable-line no-console
-
         event.preventDefault();
         event.stopPropagation();
 
